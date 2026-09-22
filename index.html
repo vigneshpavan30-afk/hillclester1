@@ -19,6 +19,8 @@
   a{color:#0C4F4B;text-decoration:none}
   a:hover{color:#B07A4F}
   input,select,textarea,button{font-family:inherit}
+  .hc-mcta{display:none}
+  @media (max-width:760px){.hc-mcta{display:flex}body{padding-bottom:76px}}
   @keyframes floatA{0%{transform:translate3d(0,0,0) rotateY(-14deg) rotateX(4deg)}50%{transform:translate3d(0,-18px,40px) rotateY(-8deg) rotateX(1deg)}100%{transform:translate3d(0,0,0) rotateY(-14deg) rotateX(4deg)}}
   @keyframes floatB{0%{transform:translate3d(0,0,0) rotateY(12deg) rotateX(-3deg)}50%{transform:translate3d(0,14px,20px) rotateY(6deg) rotateX(0deg)}100%{transform:translate3d(0,0,0) rotateY(12deg) rotateX(-3deg)}}
   @keyframes floatC{0%{transform:translate3d(0,0,0) rotateZ(-2deg)}50%{transform:translate3d(0,-10px,0) rotateZ(2deg)}100%{transform:translate3d(0,0,0) rotateZ(-2deg)}}
@@ -186,15 +188,45 @@
         </div>
         <div onClick="{{ goServices }}" style="padding:13px 22px;border-radius:11px;border:1px solid rgba(12,79,75,.25);color:#0C4F4B;font-weight:700;font-size:13.5px;cursor:pointer;transition:background .25s" style-hover="background:#EEF6F4">View all 13 →</div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:44px;perspective:1300px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;margin-top:44px;perspective:1300px">
         <sc-for list="{{ featured }}" as="s" hint-placeholder-count="6">
-          <div onClick="{{ s.open }}" style="cursor:pointer;background:#FFFFFF;border:1px solid rgba(10,31,34,.08);border-radius:18px;padding:28px 26px 26px;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s;transform-style:preserve-3d" style-hover="transform:translateY(-8px) rotateX(5deg) rotateY(-4deg);box-shadow:0 40px 60px -40px rgba(10,31,34,.5);border-color:rgba(12,79,75,.3)">
+          <div onClick="{{ s.open }}" style="cursor:pointer;background:#FFFFFF;border:1px solid rgba(10,31,34,.08);border-radius:18px;padding:28px 26px 26px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s;transform-style:preserve-3d" style-hover="transform:translateY(-8px) rotateX(5deg) rotateY(-4deg);box-shadow:0 40px 60px -40px rgba(10,31,34,.5);border-color:rgba(12,79,75,.3)">
+            <img src="{{ s.photo }}" alt="{{ s.name }}" loading="lazy" style="display:block;width:calc(100% + 52px);height:170px;object-fit:cover;margin:-28px -26px 22px;background:#DCEAE7" />
             <div style="width:40px;height:40px;border-radius:11px;background:#EEF6F4;color:#0C4F4B;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">{{ s.initials }}</div>
             <div style="font-size:19px;font-weight:700;margin-top:18px;color:#0F3A3B">{{ s.name }}</div>
             <div style="font-size:14.5px;line-height:1.65;color:#4C6A6C;margin-top:9px">{{ s.blurb }}</div>
             <div style="font-size:12.5px;font-weight:700;color:#B07A4F;margin-top:18px;letter-spacing:.4px">Learn more →</div>
           </div>
         </sc-for>
+      </div>
+    </section>
+
+    <section style="background:#08332F;color:#EAF4F1">
+      <div style="max-width:1220px;margin:0 auto;padding:96px 24px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:11.5px;letter-spacing:2.2px;font-weight:700;color:#9ED7C9">REAL SMILES</div>
+            <h2 style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1.12;margin:16px 0 0">Treatments that change how you smile.</h2>
+          </div>
+          <div onClick="{{ goGallery }}" style="padding:13px 22px;border-radius:11px;border:1px solid rgba(234,244,241,.3);color:#EAF4F1;font-weight:700;font-size:13.5px;cursor:pointer;transition:background .25s" style-hover="background:rgba(234,244,241,.1)">See the gallery →</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:18px;margin-top:44px">
+          <sc-for list="{{ showcase }}" as="x" hint-placeholder-count="6">
+            <div onClick="{{ x.open }}" style="cursor:pointer;position:relative;height:260px;border-radius:18px;overflow:hidden;background:#0A443F;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s" style-hover="transform:translateY(-6px);box-shadow:0 40px 60px -36px rgba(0,0,0,.7)">
+              <img src="{{ x.photo }}" alt="{{ x.label }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" />
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,51,47,0) 38%,rgba(8,51,47,.92) 100%)"></div>
+              <div style="position:absolute;left:20px;right:20px;bottom:18px">
+                <div style="font-size:18px;font-weight:700;color:#FFFFFF">{{ x.label }}</div>
+                <div style="font-size:13px;color:#C4DAD5;margin-top:3px">{{ x.note }}</div>
+                <div style="font-size:12.5px;font-weight:800;color:#9ED7C9;margin-top:10px;letter-spacing:.3px">Explore treatment →</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:40px;align-items:center">
+          <div onClick="{{ goAppointments }}" style="padding:15px 26px;border-radius:12px;background:#EAF4F1;color:#08332F;font-weight:800;font-size:14.5px;cursor:pointer;transition:transform .25s" style-hover="transform:translateY(-3px)">Book a Smile Consultation</div>
+          <a href="tel:9099275333" style="padding:15px 26px;border-radius:12px;border:1px solid rgba(234,244,241,.3);color:#EAF4F1;font-weight:700;font-size:14.5px;transition:background .25s" style-hover="background:rgba(234,244,241,.1)">Call (909) 927-5333</a>
+        </div>
       </div>
     </section>
 
@@ -208,6 +240,24 @@
               <div style="font-size:14px;line-height:1.66;color:#4C6A6C;margin-top:8px">{{ st.text }}</div>
             </div>
           </sc-for>
+        </div>
+        <div style="text-align:center;margin-top:36px">
+          <div onClick="{{ goAppointments }}" style="display:inline-block;padding:14px 24px;border-radius:11px;background:#0C4F4B;color:#F2F9F7;font-weight:700;font-size:14px;cursor:pointer;transition:transform .25s" style-hover="transform:translateY(-2px)">Book Your Appointment</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1220px;margin:0 auto;padding:104px 24px 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-radius:26px;overflow:hidden;background:#FFFFFF;border:1px solid rgba(10,31,34,.08);box-shadow:0 40px 80px -56px rgba(10,31,34,.5)">
+        <img src="{{ whiteningPhoto }}" alt="Before and after professional teeth whitening" loading="lazy" style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block" />
+        <div style="padding:clamp(32px,4.5vw,56px)">
+          <div style="font-size:11.5px;letter-spacing:2.2px;font-weight:700;color:#B07A4F">BRIGHTER SMILE</div>
+          <h2 style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.14;margin:16px 0 0">Whiter teeth, without the sensitivity.</h2>
+          <p style="font-size:16px;line-height:1.7;color:#3F5D5E;margin:16px 0 0">In-office and take-home whitening, with your gums protected and sensitivity managed at every step.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+            <div onClick="{{ goAppointments }}" style="padding:14px 24px;border-radius:11px;background:#0C4F4B;color:#F2F9F7;font-weight:700;font-size:14px;cursor:pointer;transition:transform .25s" style-hover="transform:translateY(-2px)">Book Whitening</div>
+            <div onClick="{{ openWhitening }}" style="padding:14px 24px;border-radius:11px;border:1px solid rgba(12,79,75,.25);color:#0C4F4B;font-weight:700;font-size:14px;cursor:pointer;transition:background .25s" style-hover="background:#EEF6F4">How it works</div>
+          </div>
         </div>
       </div>
     </section>
@@ -386,6 +436,7 @@
     <section style="max-width:1220px;margin:0 auto;padding:80px 24px 96px">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:56px;align-items:start">
         <div>
+          <img src="{{ current.photo }}" alt="{{ current.name }}" style="display:block;width:100%;height:clamp(220px,32vw,340px);object-fit:cover;border-radius:20px;margin-bottom:40px;background:#DCEAE7;box-shadow:0 36px 70px -48px rgba(10,31,34,.55)" />
           <h2 style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:30px;margin:0">What to expect</h2>
           <p style="font-size:16.5px;line-height:1.75;color:#3F5D5E;margin:16px 0 0">{{ current.detail }}</p>
           <div style="display:grid;gap:12px;margin-top:30px">
@@ -763,6 +814,28 @@
 
   </main>
 
+  <!-- ============ SITE-WIDE CTA ============ -->
+  <sc-if value="{{ showCtaBand }}">
+    <section style="max-width:1220px;margin:0 auto;padding:0 24px 96px">
+      <div style="background:#08332F;border-radius:26px;padding:clamp(34px,4.5vw,60px);color:#EAF4F1;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap">
+        <div style="position:absolute;inset:0;background:radial-gradient(600px 340px at 88% 10%,rgba(176,122,79,.24),transparent 70%)"></div>
+        <div style="position:relative;max-width:560px">
+          <h2 style="font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(28px,3.4vw,42px);line-height:1.12;margin:0">Ready for a healthier smile?</h2>
+          <p style="font-size:16px;line-height:1.7;color:#C4DAD5;margin:14px 0 0">Request a time online, and we'll confirm by phone within one business day.</p>
+        </div>
+        <div style="position:relative;display:flex;gap:12px;flex-wrap:wrap">
+          <div onClick="{{ goAppointments }}" style="padding:15px 26px;border-radius:12px;background:#EAF4F1;color:#08332F;font-weight:800;font-size:14.5px;cursor:pointer;transition:transform .25s" style-hover="transform:translateY(-3px)">Book an Appointment</div>
+          <a href="tel:9099275333" style="padding:15px 26px;border-radius:12px;border:1px solid rgba(234,244,241,.3);color:#EAF4F1;font-weight:700;font-size:14.5px;transition:background .25s" style-hover="background:rgba(234,244,241,.1)">Call (909) 927-5333</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <div class="hc-mcta" style="position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(251,253,252,.96);backdrop-filter:blur(12px);border-top:1px solid rgba(10,31,34,.1);box-shadow:0 -12px 30px -18px rgba(10,31,34,.35)">
+    <a href="tel:9099275333" style="flex:1;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(12,79,75,.3);color:#0C4F4B;font-weight:800;font-size:15px">Call Now</a>
+    <div onClick="{{ goAppointments }}" role="button" style="flex:1.4;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#0C4F4B;color:#F2F9F7;font-weight:800;font-size:15px;cursor:pointer">Book a Visit</div>
+  </div>
+
   <footer style="background:#08332F;color:#C4DAD5">
     <div style="max-width:1220px;margin:0 auto;padding:72px 24px 34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px">
       <div>
@@ -852,13 +925,46 @@ class Component extends DCLogic {
     { category:'Restorative', date:'May 2026', title:'Crown, filling, or wait and watch?', excerpt:'A practical way to think about how much tooth is left and what it can carry.', body:['The deciding factor is how much healthy tooth structure remains. A filling relies on the surrounding tooth for strength; a crown takes over that job entirely.','When a cusp is cracked or more than half the biting surface is missing, a filling tends to flex and eventually fail. That is when a crown becomes the more conservative choice, counterintuitive as it sounds.','Small, stable, symptom-free spots can genuinely be monitored. We photograph them and compare at your next visit rather than treating immediately.'] }
   ];
 
+  IMG = 'https://hillcrestdentalstudio.com/wp-content/uploads/';
+
+  SERVICE_PHOTOS = {
+    'cleanings': '2024/08/Dental-Cleanings.jpg',
+    'preventive': '2024/05/dentistry_girl_1920-1.jpg',
+    'pediatric': '2024/05/pediatric-dentistry-1920-3.jpg',
+    'cosmetic': '2024/08/teethwhitening_img.jpg',
+    'veneers': '2024/08/veneers_img.jpg',
+    'whitening': '2024/08/teethwhitening_img.jpg',
+    'crowns-bridges': '2024/08/bridges_img.jpg',
+    'implants': '2024/05/dental-implants-4.jpg',
+    'dentures': '2024/05/smiling-older-couple-1.jpg',
+    'invisalign': '2024/05/invisalign-1-1.jpg',
+    'root-canals': '2024/08/porcelaincrowns_img.jpg',
+    'wisdom-teeth': '2024/05/dental-xray-2-2.jpg',
+    'tmj-botox': '2024/05/positive-girl-dentist-1.jpg'
+  };
+
+  SHOWCASE = [
+    { slug:'whitening', label:'Teeth Whitening', note:'Several shades brighter' },
+    { slug:'veneers', label:'Porcelain Veneers', note:'Shape, shade and alignment' },
+    { slug:'invisalign', label:'Invisalign', note:'Clear, removable aligners' },
+    { slug:'implants', label:'Dental Implants', note:'A permanent replacement' },
+    { slug:'crowns-bridges', label:'Crowns & Bridges', note:'Digitally scanned fit' },
+    { slug:'pediatric', label:'Pediatric Dentistry', note:'Calm first visits' }
+  ];
+
   GALLERY = [
     { label:'Treatment room', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/positive-girl-dentist-1.jpg' },
     { label:'Digital imaging', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/dental-xray-2-2.jpg' },
     { label:'Patient care', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/dentistry_girl_1920-1.jpg' },
     { label:'Our team', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/2150505338.jpg' },
-    { label:'Reception', src:'' },
-    { label:'Sterilization bay', src:'' }
+    { label:'Teeth whitening', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/08/teethwhitening_img.jpg' },
+    { label:'Porcelain veneers', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/08/veneers_img.jpg' },
+    { label:'Invisalign aligners', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/invisalign-1-1.jpg' },
+    { label:'Dental implants', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/dental-implants-4.jpg' },
+    { label:'Dental bridges', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/08/bridges_img.jpg' },
+    { label:'Porcelain crowns', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/08/porcelaincrowns_img.jpg' },
+    { label:'Professional cleanings', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/08/Dental-Cleanings.jpg' },
+    { label:'Kids dentistry', src:'https://hillcrestdentalstudio.com/wp-content/uploads/2024/05/pediatric-dentistry-1920-3.jpg' }
   ];
 
   FAQS = [
@@ -1025,7 +1131,8 @@ class Component extends DCLogic {
 
   renderVals() {
     const p = this.state.page;
-    const mk = (s) => Object.assign({}, s, { tagUpper: s.tag.toUpperCase(), open: () => this.openService(s.slug) });
+    const photo = (slug) => this.IMG + (this.SERVICE_PHOTOS[slug] || '2024/05/positive-girl-dentist-1.jpg');
+    const mk = (s) => Object.assign({}, s, { tagUpper: s.tag.toUpperCase(), photo: photo(s.slug), open: () => this.openService(s.slug) });
     const services = this.SERVICES.map(mk);
     const current = mk(this.SERVICES.find(s => s.slug === this.state.slug) || this.SERVICES[0]);
     const ringItems = [
@@ -1055,6 +1162,10 @@ class Component extends DCLogic {
       featured: [services[0], services[9], services[7], services[4], services[5], services[12]],
       current,
       related: services.filter(s => s.slug !== current.slug).slice(0, 6),
+      showcase: this.SHOWCASE.map(x => Object.assign({}, x, { photo: photo(x.slug), open: () => this.openService(x.slug) })),
+      whiteningPhoto: photo('whitening'),
+      openWhitening: () => this.openService('whitening'),
+      showCtaBand: !['home', 'appointments', 'contact'].includes(p),
 
       ring: ringItems.map((r, i) => Object.assign({}, r, { transform: 'rotateY(' + (i * 60) + 'deg) translateZ(150px)' })),
 
